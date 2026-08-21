@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garage242 — Voitures d'occasion vérifiées au Congo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12211a;
+    --forest:#1f5c3f;
+    --forest-light:#2d7a54;
+    --gold:#d9a441;
+    --gold-light:#f0c876;
+    --rust:#b44724;
+    --paper:#efe7d8;
+    --paper-2:#e4d9c2;
+    --cream:#f7f2e6;
+    --ok:#3f7a4f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  h1,h2,h3{font-family:'Fraunces',serif;line-height:1.05;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:.72rem;
+    color:var(--forest);
+    font-weight:700;
+  }
+  ::selection{background:var(--gold);color:var(--ink);}
+  :focus-visible{outline:3px solid var(--rust);outline-offset:2px;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--ink);
+    color:var(--cream);
+    border-bottom:3px solid var(--gold);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1180px;margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces',serif;font-weight:900;font-size:1.5rem;
+    display:flex;align-items:baseline;gap:4px;color:var(--cream);
+  }
+  .logo span{color:var(--gold);}
+  .nav-links{display:flex;gap:28px;align-items:center;}
+  .nav-links a{font-size:.95rem;font-weight:500;opacity:.9;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;color:var(--gold-light);}
+  .btn{
+    display:inline-block;padding:11px 20px;border-radius:3px;
+    font-weight:600;font-size:.9rem;border:2px solid transparent;
+    cursor:pointer;transition:transform .15s ease, background .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-gold{background:var(--gold);color:var(--ink);}
+  .btn-gold:hover{background:var(--gold-light);}
+  .btn-outline{border-color:var(--cream);color:var(--cream);}
+  .btn-outline:hover{background:var(--cream);color:var(--ink);}
+  .btn-forest{background:var(--forest);color:var(--cream);}
+  .btn-forest:hover{background:var(--forest-light);}
+  .burger{display:none;background:none;border:none;color:var(--cream);font-size:1.6rem;cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(circle at 85% 20%, rgba(217,164,65,.25), transparent 45%),
+      linear-gradient(180deg,var(--ink) 0%, #16291f 100%);
+    color:var(--cream);
+    padding:76px 0 60px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:6px;
+    background:repeating-linear-gradient(90deg,var(--forest) 0 18px, var(--gold) 18px 36px, var(--rust) 36px 54px);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;}
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.6rem);font-weight:900;letter-spacing:-.01em;}
+  .hero h1 em{font-style:normal;color:var(--gold-light);}
+  .hero p.lead{margin-top:18px;font-size:1.1rem;color:#d9d2c1;max-width:46ch;}
+  .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+  .stat-row{display:flex;gap:0;margin-top:44px;border-top:1px solid rgba(247,242,230,.2);padding-top:22px;}
+  .stat{flex:1;padding-right:18px;}
+  .stat b{font-family:'Fraunces',serif;font-size:1.8rem;display:block;color:var(--gold-light);}
+  .stat span{font-size:.78rem;color:#c9c1ac;text-transform:uppercase;letter-spacing:.06em;}
+
+  /* hero signature: registration-card mock */
+  .id-card{
+    background:var(--cream);color:var(--ink);border-radius:10px;
+    padding:22px 22px 18px;position:relative;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+    transform:rotate(2deg);
+    border:1px solid rgba(0,0,0,.08);
+  }
+  .id-card::before{
+    content:"";position:absolute;inset:8px;border:1.5px dashed rgba(31,92,63,.35);border-radius:6px;pointer-events:none;
+  }
+  .id-card-head{display:flex;justify-content:space-between;align-items:flex-start;}
+  .id-card-head .tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--forest);font-weight:700;}
+  .stamp{
+    border:2px solid var(--rust);color:var(--rust);border-radius:50%;
+    width:64px;height:64px;display:flex;align-items:center;justify-content:center;
+    text-align:center;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;
+    line-height:1.1;transform:rotate(-14deg);opacity:.85;
+  }
+  .id-card h3{font-size:1.4rem;margin-top:14px;}
+  .id-card .specs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:.8rem;}
+  .id-card .specs div span{display:block;color:#7a7364;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;}
+  .id-card .price{margin-top:18px;padding-top:14px;border-top:1px dashed rgba(0,0,0,.2);display:flex;justify-content:space-between;align-items:center;}
+  .id-card .price b{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--forest);}
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{background:var(--forest);color:var(--cream);padding:22px 0;}
+  .trust .wrap{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;}
+  .trust-item{display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;flex:1;min-width:220px;}
+  .trust-item .ico{font-family:'JetBrains Mono',monospace;font-weight:700;background:rgba(247,242,230,.15);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:76px 0;}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.4rem);margin-top:10px;}
+  .section-head p{margin-top:12px;color:#5a5648;font-size:1.02rem;}
+
+  /* ---------- FILTERS ---------- */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:500;
+    padding:9px 16px;border-radius:20px;border:1.5px solid var(--forest);
+    color:var(--forest);background:transparent;cursor:pointer;transition:all .2s;
+  }
+  .chip.active,.chip:hover{background:var(--forest);color:var(--cream);}
+
+  /* ---------- LISTINGS ---------- */
+  .listings{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;}
+  .car-card{
+    background:var(--cream);border-radius:8px;overflow:hidden;
+    border:1px solid rgba(18,33,26,.1);
+    transition:transform .25s ease, box-shadow .25s ease;
+    position:relative;
+    opacity:0;transform:translateY(16px);
+  }
+  .car-card.visible{opacity:1;transform:translateY(0);}
+  .car-card:hover{transform:translateY(-6px);box-shadow:0 18px 34px -14px rgba(18,33,26,.35);}
+  .car-photo{
+    height:150px;position:relative;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;color:rgba(247,242,230,.9);font-weight:700;font-size:1rem;
+  }
+  .car-photo .verified{
+    position:absolute;top:10px;right:10px;background:var(--gold);color:var(--ink);
+    font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.05em;
+    padding:4px 9px;border-radius:20px;
+  }
+  .car-body{padding:18px 18px 20px;border-top:2px dashed rgba(18,33,26,.15);}
+  .car-body h4{font-family:'Fraunces',serif;font-size:1.15rem;}
+  .car-loc{font-size:.78rem;color:#7a7364;margin-top:2px;}
+  .car-specs{
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0;
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  }
+  .car-specs div span{display:block;color:#9a9280;font-size:.62rem;text-transform:uppercase;}
+  .car-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+  .car-price{font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--forest);}
+  .car-price small{display:block;font-family:'Work Sans';font-weight:400;font-size:.65rem;color:#9a9280;}
+  .car-cta{
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;
+    background:var(--ink);color:var(--cream);padding:9px 14px;border-radius:4px;
+  }
+  .car-cta:hover{background:var(--rust);}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:step;}
+  .step{position:relative;padding-top:8px;}
+  .step .num{
+    font-family:'Fraunces',serif;font-size:3rem;font-weight:900;color:var(--gold);
+    -webkit-text-stroke:1.5px var(--forest);
+  }
+  .step h3{margin-top:6px;font-size:1.25rem;}
+  .step p{margin-top:8px;color:#5a5648;font-size:.94rem;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-section{background:var(--ink);color:var(--cream);}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .testi{background:rgba(247,242,230,.06);border:1px solid rgba(247,242,230,.15);border-radius:8px;padding:22px;}
+  .testi p{font-size:.96rem;color:#e3ddcd;}
+  .testi .who{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--gold-light);}
+
+  /* ---------- SELL CTA ---------- */
+  .sell{
+    background:linear-gradient(120deg,var(--forest),var(--forest-light));
+    color:var(--cream);border-radius:14px;padding:52px;
+    display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:center;
+  }
+  .sell h2{font-size:clamp(1.6rem,3vw,2.1rem);}
+  .sell p{margin-top:10px;color:#e6f0e9;max-width:48ch;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#cdc6b4;padding:52px 0 26px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding-bottom:32px;border-bottom:1px solid rgba(247,242,230,.12);}
+  footer h5{font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin-bottom:14px;}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:9px;font-size:.9rem;}
+  footer li a:hover{color:var(--gold-light);}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:22px;font-size:.78rem;flex-wrap:wrap;gap:10px;}
+
+  /* WhatsApp float */
+  .wa-float{
+    position:fixed;bottom:22px;right:22px;background:#1f5c3f;color:#fff;
+    width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:1.5rem;box-shadow:0 10px 24px rgba(0,0,0,.3);z-index:60;border:2px solid var(--gold);
+  }
+
+  @media(max-width:860px){
+    .nav-links{display:none;}
+    .burger{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .id-card{transform:none;max-width:340px;margin:0 auto;}
+    .steps,.testi-grid{grid-template-columns:1fr;}
+    .sell{grid-template-columns:1fr;padding:32px;}
+    .foot-grid{grid-template-columns:1fr;gap:26px;}
+    .stat-row{flex-direction:column;gap:14px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">GARAGE<span>242</span></div>
+    <nav class="nav-links">
+      <a href="#annonces">Annonces</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#vendre">Vendre ma voiture</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#annonces" class="btn btn-gold">Voir les annonces</a>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Brazzaville · Pointe-Noire</p>
+      <h1>La bonne voiture. Le bon prix. <em>Zéro arnaque.</em></h1>
+      <p class="lead">Garage242 vérifie chaque véhicule avant publication : carte grise en règle, kilométrage certifié, contrôle mécanique. Achetez une occasion en toute confiance, sans mauvaise surprise.</p>
+      <div class="hero-cta">
+        <a href="#annonces" class="btn btn-gold">Parcourir les annonces</a>
+        <a href="#vendre" class="btn btn-outline">Vendre ma voiture</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>320+</b><span>Véhicules vendus</span></div>
+        <div class="stat"><b>48h</b><span>Délai moyen de vente</span></div>
+        <div class="stat"><b>100%</b><span>Documents vérifiés</span></div>
+      </div>
+    </div>
+    <div class="id-card">
+      <div class="id-card-head">
+        <div>
+          <div class="tag">FICHE VÉHICULE N° 0142</div>
+          <h3>Toyota RAV4 2016</h3>
+        </div>
+        <div class="stamp">VÉRIFIÉ<br>✓</div>
+      </div>
+      <div class="specs">
+        <div><span>Kilométrage</span>82 400 km</div>
+        <div><span>Boîte</span>Automatique</div>
+        <div><span>Carburant</span>Essence</div>
+        <div><span>Localisation</span>Bacongo, Brazza</div>
+      </div>
+      <div class="price">
+        <span class="mono" style="font-size:.7rem;color:#7a7364;">Prix négociable</span>
+        <b>9 800 000 F</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap trust-item" style="display:flex;">
+    <div class="trust-item"><span class="ico mono">✓</span> Carte grise vérifiée</div>
+    <div class="trust-item"><span class="ico mono">km</span> Kilométrage certifié</div>
+    <div class="trust-item"><span class="ico mono">₣</span> Paiement sécurisé</div>
+    <div class="trust-item"><span class="ico mono">🚚</span> Livraison Brazza &amp; Pointe-Noire</div>
+  </div>
+</div>
+
+<section id="annonces">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Annonces du moment</p>
+      <h2>Des véhicules contrôlés, prêts à rouler</h2>
+      <p>Chaque fiche indique l'état réel du véhicule : kilométrage, année, papiers. Cliquez sur « Contacter » pour discuter directement avec le vendeur sur WhatsApp.</p>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="chip active" data-filter="all">Tous</button>
+      <button class="chip" data-filter="berline">Berlines</button>
+      <button class="chip" data-filter="4x4">4x4 / SUV</button>
+      <button class="chip" data-filter="utilitaire">Utilitaires</button>
+    </div>
+
+    <div class="listings" id="listings">
+      <!-- Card 1 -->
+      <article class="car-card" data-cat="berline">
+        <div class="car-photo" style="background:linear-gradient(135deg,#1f5c3f,#12211a);">
+          Toyota Corolla
+          <span class="verified">VÉRIFIÉ</span>
+        </div>
+        <div class="car-body">
+          <h4>Toyota Corolla 2014</h4>
+          <p class="car-loc">Poto-Poto, Brazzaville</p>
+          <div class="car-specs">
+            <div><span>Année</span>2014</div>
+            <div><span>Km</span>96 000</div>
+            <div><span>Boîte</span>Manuelle</div>
+          </div>
+          <div class="car-foot">
+            <div class="car-price">4 200 000 F<small>Prix fixe</small></div>
+            <a class="car-cta" href="#contact">Contacter →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="car-card" data-cat="4x4">
+        <div class="car-photo" style="background:linear-gradient(135deg,#b44724,#12211a);">
+          Toyota Hilux
+          <span class="verified">VÉRIFIÉ</span>
+        </div>
+        <div class="car-body">
+          <h4>Toyota Hilux 2018</h4>
+          <p class="car-loc">Tié-Tié, Pointe-Noire</p>
+          <div class="car-specs">
+            <div><span>Année</span>2018</div>
+            <div><span>Km</span>61 200</div>
+            <div><span>Boîte</span>Manuelle</div>
+          </div>
+          <div class="car-foot">
+            <div class="car-price">14 500 000 F<small>Négociable</small></div>
+            <a class="car-cta" href="#contact">Contacter →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="car-card" data-cat="4x4">
+        <div class="car-photo" style="background:linear-gradient(135deg,#d9a441,#12211a);">
+          Nissan X-Trail
+          <span class="verified">VÉRIFIÉ</span>
+        </div>
+        <div class="car-body">
+          <h4>Nissan X-Trail 2015</h4>
+          <p class="car-loc">Moungali, Brazzaville</p>
+          <div class="car-specs">
+            <div><span>Année</span>2015</div>
+            <div><span>Km</span>88 700</div>
+            <div><span>Boîte</span>Automatique</div>
+          </div>
+          <div class="car-foot">
+            <div class="car-price">8 300 000 F<small>Négociable</small></div>
+            <a class="car-cta" href="#contact">Contacter →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="car-card" data-cat="berline">
+        <div class="car-photo" style="background:linear-gradient(135deg,#2d7a54,#12211a);">
+          Mercedes Classe C
+          <span class="verified">VÉRIFIÉ</span>
+        </div>
+        <div class="car-body">
+          <h4>Mercedes Classe C 2013</h4>
+          <p class="car-loc">Centre-ville, Brazzaville</p>
+          <div class="car-specs">
+            <div><span>Année</span>2013</div>
+            <div><span>Km</span>110 300</div>
+            <div><span>Boîte</span>Automatique</div>
+          </div>
+          <div class="car-foot">
+            <div class="car-price">7 900 000 F<small>Prix fixe</small></div>
+            <a class="car-cta" href="#contact">Contacter →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="car-card" data-cat="berline">
+        <div class="car-photo" style="background:linear-gradient(135deg,#12211a,#1f5c3f);">
+          Peugeot 206
+          <span class="verified">VÉRIFIÉ</span>
+        </div>
+        <div class="car-body">
+          <h4>Peugeot 206 2010</h4>
+          <p class="car-loc">Bacongo, Brazzaville</p>
+          <div class="car-specs">
+            <div><span>Année</span>2010</div>
+            <div><span>Km</span>134 000</div>
+            <div><span>Boîte</span>Manuelle</div>
+          </div>
+          <div class="car-foot">
+            <div class="car-price">2 600 000 F<small>Prix fixe</small></div>
+            <a class="car-cta" href="#contact">Contacter →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="car-card" data-cat="utilitaire">
+        <div class="car-photo" style="background:linear-gradient(135deg,#7a7364,#12211a);">
+          Toyota Hiace
+          <span class="verified">VÉRIFIÉ</span>
+        </div>
+        <div class="car-body">
+          <h4>Toyota Hiace 2012</h4>
+          <p class="car-loc">Ngoyo, Pointe-Noire</p>
+          <div class="car-specs">
+            <div><span>Année</span>2012</div>
+            <div><span>Km</span>158 900</div>
+            <div><span>Boîte</span>Manuelle</div>
+          </div>
+          <div class="car-foot">
+            <div class="car-price">6 100 000 F<small>Négociable</small></div>
+            <a class="car-cta" href="#contact">Contacter →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="comment" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Le processus</p>
+      <h2>Comment ça marche</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>Choisissez votre véhicule</h3>
+        <p>Filtrez par type, budget et localisation, puis consultez la fiche complète de chaque voiture.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>Vérifiez et essayez</h3>
+        <p>Rencontrez le vendeur, contrôlez les papi
