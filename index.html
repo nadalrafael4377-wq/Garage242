@@ -462,4 +462,142 @@
       <div class="step">
         <div class="num">02</div>
         <h3>Vérifiez et essayez</h3>
-        <p>Rencontrez le vendeur, contrôlez les papi
+        <p>Rencontrez le vendeur, contrôlez les papiers (carte grise, contrôle technique) et faites un essai routier.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>Concluez en sécurité</h3>
+        <p>Nous vous accompagnons pour le transfert de propriété et le paiement, à Brazzaville comme à Pointe-Noire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testi-section">
+  <div class="wrap">
+    <div class="section-head" style="color:var(--cream);">
+      <p class="eyebrow" style="color:var(--gold-light);">Ils nous font confiance</p>
+      <h2>Ce que disent nos clients</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi">
+        <p>« J'ai trouvé ma Corolla en trois jours, avec tous les papiers en règle. Aucune surprise à la Sous-Préfecture. »</p>
+        <div class="who">— Merveille N., Bacongo</div>
+      </div>
+      <div class="testi">
+        <p>« Le kilométrage annoncé correspondait exactement. Enfin un service sérieux pour acheter d'occasion au Congo. »</p>
+        <div class="who">— Christ M., Pointe-Noire</div>
+      </div>
+      <div class="testi">
+        <p>« J'ai vendu mon Hilux en une semaine, sans intermédiaire douteux ni négociation interminable. »</p>
+        <div class="who">— Divine O., Moungali</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vendre">
+  <div class="wrap">
+    <div class="sell">
+      <div>
+        <p class="eyebrow" style="color:var(--gold-light);">Vendeurs</p>
+        <h2>Vendez votre voiture en quelques jours, au juste prix</h2>
+        <p>Publication gratuite, vérification des papiers incluse, mise en avant auprès de centaines d'acheteurs à Brazzaville et Pointe-Noire.</p>
+      </div>
+      <div style="text-align:left;">
+        <a href="#contact" class="btn btn-gold" style="width:100%;text-align:center;">Publier mon annonce</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--paper-2);">
+  <div class="wrap" style="max-width:620px;text-align:center;">
+    <p class="eyebrow">Contact</p>
+    <h2 style="margin-top:10px;">Une question ? Écrivez-nous sur WhatsApp</h2>
+    <p style="margin-top:12px;color:#5a5648;">Notre équipe répond en général en moins d'une heure, du lundi au samedi.</p>
+    <a href="https://wa.me/242000000000" target="_blank" rel="noopener" class="btn btn-forest" style="margin-top:22px;">Discuter sur WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="font-size:1.3rem;">GARAGE<span>242</span></div>
+        <p style="margin-top:14px;font-size:.9rem;max-width:34ch;">La marketplace de voitures d'occasion vérifiées à Brazzaville et Pointe-Noire.</p>
+      </div>
+      <div>
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#annonces">Annonces</a></li>
+          <li><a href="#comment">Comment ça marche</a></li>
+          <li><a href="#vendre">Vendre ma voiture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li>Avenue de la Paix, Brazzaville</li>
+          <li>Rue Mizonzi, Pointe-Noire</li>
+          <li>WhatsApp : +242 06 478 63 36</li>
+          <li>contact@garage242.cg</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Garage242. Tous droits réservés.</span>
+      <span>République du Congo</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/242000000000" target="_blank" rel="noopener" class="wa-float" aria-label="Contacter sur WhatsApp">💬</a>
+
+<script>
+  // Filtres d'annonces
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.car-card');
+  chips.forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      chips.forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      const filter = chip.dataset.filter;
+      cards.forEach(card=>{
+        const match = filter === 'all' || card.dataset.cat === filter;
+        card.style.display = match ? '' : 'none';
+      });
+    });
+  });
+
+  // Animation d'apparition au scroll
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.15});
+  cards.forEach(card=>observer.observe(card));
+
+  // Menu mobile simple
+  const burger = document.getElementById('burger');
+  burger.addEventListener('click', ()=>{
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    links.style.display = open ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '64px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'var(--ink)';
+    links.style.padding = '20px 24px';
+    links.style.gap = '16px';
+  });
+</script>
+
+</body>
+</html>
+
